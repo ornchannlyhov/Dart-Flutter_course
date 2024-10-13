@@ -15,11 +15,16 @@ bool isBalanced(String str) {
       }
     }
   }
+
   return stack.isEmpty;
 }
 
+String checkBrackets(String str) {
+  return isBalanced(str) ? 'match' : 'not match';
+}
+
 void main() {
-  print(isBalanced('{what is (42)}?')); 
-  print(isBalanced('[text}'));
-  print(isBalanced('{[[(a)b]c]d}')); 
+  print(checkBrackets('{what is (42)}?'));
+  print(checkBrackets('{[}'));
+  print(checkBrackets('{[[(a)b]c]d}'));
 }
