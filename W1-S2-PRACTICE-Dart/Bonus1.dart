@@ -3,7 +3,8 @@ enum Direction { north, east, south, west }
 class Robot {
   int x, y;
   Direction direction;
-
+  
+  // constructor
   Robot(this.x, this.y, this.direction);
 
   void turnRight() {
@@ -32,25 +33,23 @@ class Robot {
   }
 
   void execute(String instructions) {
+    print('Initial Position: ($x, $y), Facing: $direction');
+    
     for (var instruction in instructions.split('')) {
-      if (instruction == 'R') {
+      if (instruction == 'R' || instruction == 'r') {
         turnRight();
-      } else if (instruction == 'L') {
+      } else if (instruction == 'L' || instruction == 'l') {
         turnLeft();
-      } else if (instruction == 'A') {
+      } else if (instruction == 'A' || instruction == 'a') {
         advance();
       }
     }
-  }
 
-  @override
-  String toString() {
-    return 'Position: {$x, $y}, Facing: $direction';
+    print('Final Position: ($x, $y), Facing: $direction');
   }
 }
 
 void main() {
   var robot = Robot(7, 3, Direction.north);
-  robot.execute('RAALAL');
-  print(robot);
+  robot.execute('la');
 }
