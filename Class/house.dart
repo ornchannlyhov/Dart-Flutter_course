@@ -1,84 +1,140 @@
+enum Color {
+  red,
+  green,
+  blue,
+  yellow,
+  orange,
+  purple,
+  black,
+  white,
+  transparent;
+
+  String get displayName {
+    switch (this) {
+      case Color.red:
+        return 'Red';
+      case Color.green:
+        return 'Green';
+      case Color.blue:
+        return 'Blue';
+      case Color.yellow:
+        return 'Yellow';
+      case Color.orange:
+        return 'Orange';
+      case Color.purple:
+        return 'Purple';
+      case Color.black:
+        return 'Black';
+      case Color.white:
+        return 'White';
+      case Color.transparent:
+        return 'Transparent';
+      default:
+        return 'Unknown Color';
+    }
+  }
+}
+
+enum Country {
+  CAMBODIA("Cambodia"),
+  VIETNAM("Vietnam"),
+  FRANCE("France");
+
+  final String label;
+
+  const Country(this.label);
+
+  @override
+  String toString() => label;
+}
+
 class Window {
-  String color;
   String side;
   int floor;
+  Color color;
 
-  //constructor
-  Window(this.color, this.side, this.floor);
+  // Constructor
+  Window(
+      {this.color = Color.transparent,
+      required this.side,
+      required this.floor});
 
-  void display() {
-    print('Window $color on $side side, Floor: $floor');
+  @override
+  String toString() {
+    return 'Window: Color: ${color.displayName}, Side: $side, Floor: $floor';
   }
 }
 
 class Roof {
+  Color color;
   String type;
 
-  //constructor
-  Roof(this.type);
+  // Constructor
+  Roof(this.type, this.color);
 
-  void display() {
-    print('Roof type: $type');
+  @override
+  String toString() {
+    return 'Roof: Type: $type, Color: ${color.displayName}';
   }
 }
 
 class Door {
-  String color;
+  Color color;
+  int floor;
 
-  //constructor
-  Door(this.color);
+  // Constructor
+  Door(this.color, this.floor);
 
-  void display() {
-    print('Door color: $color');
+  @override
+  String toString() {
+    return 'Door: Color: ${color.displayName}';
   }
 }
 
-class Chimney {
-  bool hasChimney;
-  
-  //constructor
-  Chimney(this.hasChimney);
+class Address {
+  final Country country;
+  final String city;
+  final String street;
 
-  void display() {
-    print('Chimney present: ${hasChimney ? "Yes" : "No"}');
+  Address(
+      {this.country = Country.CAMBODIA,
+      required this.city,
+      required this.street});
+
+  @override
+  String toString() {
+    return 'Address: $country, City: $city, Street: $street';
   }
 }
 
 class House {
+  Address address;
   List<Window> windows;
   Roof roof;
   Door door;
-  Chimney chimney;
 
-  House(this.windows, this.roof, this.door, this.chimney);
-
-  void displayHouse() {
-    print("My House");
-    roof.display();
-    door.display();
-    chimney.display();
-    windows.forEach((window) => window.display());
+  House(this.windows, this.roof, this.door, this.address);
+  @override
+  String toString() {
+    return '-------------------------------------- \n'
+        'My House:\n'
+        '${address.toString()}\n'
+        '${windows.map((window) => window.toString()).join('\n')}\n'
+        '${roof.toString()}\n'
+        '${door.toString()}\n'
+        '--------------------------------------';
   }
 }
 
 void main() {
-  Window window1 = Window('Red', 'Left', 1);
-  Window window2 = Window('Green', 'Right', 1);
-  Window window3 = Window('Red', 'Left', 2);
-  Window window4 = Window('Green', 'Right', 2);
+  // Create instances of components
+  var window1 = Window(color: Color.blue, side: 'Front', floor: 1);
+  var window2 = Window(color: Color.green, side: 'Back', floor: 2);
+  var roof = Roof('Gable', Color.red);
+  var door = Door(Color.black, 1);
+  var address = Address(city: 'Phnom Penh', street: 'Street 123');
 
-  Roof roof = Roof('Triangle');
-  Door door = Door('Black');
-  Chimney chimney = Chimney(true);
-  House house1 =
-      House([window1, window2, window3, window4], roof, door, chimney);
-  house1.displayHouse();
-  Window window5 = Window('Blue', 'Left', 1);
-  Window window6 = Window('Blue', 'Right', 1);
-  Roof flatRoof = Roof('Flat');
-  Door blackDoor = Door('Black');
-  Chimney noChimney = Chimney(false);
+  var house = House([window1, window2], roof, door, address);
 
-  House house2 = House([window5, window6], flatRoof, blackDoor, noChimney);
-  house2.displayHouse();
+  print(house);
 }

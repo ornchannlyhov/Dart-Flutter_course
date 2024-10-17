@@ -10,7 +10,7 @@ class Distance {
   double get meters => _meters;
   double get cms => _meters * 100;
 
-  Distance operator +(Distance other) => Distance.meters(_meters + other._meters);
+  Distance operator+ (Distance other) => Distance.meters(_meters + other._meters);
 }
 
 void main() {
