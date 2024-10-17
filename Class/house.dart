@@ -129,7 +129,7 @@ class House {
 void main() {
   // Create instances of components
   var window1 = Window(color: Color.blue, side: 'Front', floor: 1);
-  var window2 = Window(color: Color.green, side: 'Back', floor: 2);
+  var window2 = Window(color: Color.green, side: 'Front ', floor: 2);
   var roof = Roof('Gable', Color.red);
   var door = Door(Color.black, 1);
   var address = Address(city: 'Phnom Penh', street: 'Street 123');
