@@ -2,7 +2,7 @@ class Distance {
   final double _meters;
 
   //default constructor
-  Distance([double meters = 0]) : _meters = meters;
+  Distance([double meters = 0]) : _meters = meters; // defualtly set meters to 0 if no argument 
   // named constructor
   Distance.kms(double kms) : _meters = kms * 1000;
   Distance.meters(double meters) : _meters = meters;
