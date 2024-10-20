@@ -24,10 +24,21 @@ class Transaction {
     return 'Transaction ID: $id \n'
         'Amount: $amount \n'
         'Date: ${date.toIso8601String()} \n'
-        ' Description: $description';
+        'Description: $description';
   }
 }
 
+class Address {
+  String _street;
+  int _zipCode;
+
+  Address(this._street, this._zipCode);
+
+  String get street => _street;
+  int get zipCode => _zipCode;
+
+  String toString() => 'street: $_street, zip code: $_zipCode';
+}
 class BankAccount {
   final String _accountNumber;
   final String _accountType;
@@ -35,8 +46,8 @@ class BankAccount {
   double _balance;
   final double _interestRate;
   final DateTime _createdDate;
-  Status _status;
-  List<Transaction> _transactions;
+  final Status _status;
+  final List<Transaction> _transactions;
 
   // Constructor
   BankAccount({
@@ -99,7 +110,7 @@ class BankAccount {
 
 class Bank {
   final String name;
-  final String address;
+  final Address address;
   final String contactInfo;
   List<BankAccount> _accounts;
 
@@ -164,7 +175,7 @@ void main() {
   // Create a bank
   var myBank = Bank(
     name: 'CADT Bank',
-    address: '123 Bank St',
+    address: Address('123 Main St', 12345),
     contactInfo: 'info@cadtbank.com',
   );
 
