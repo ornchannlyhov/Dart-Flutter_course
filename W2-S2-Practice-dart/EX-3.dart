@@ -38,7 +38,6 @@ class MyDuration {
 
     MyDuration.fromMilliseconds(this._milliseconds);
 
-    // Display the duration in a readable format
     @override
     String toString() {
         int seconds = (_milliseconds / 1000).round();
