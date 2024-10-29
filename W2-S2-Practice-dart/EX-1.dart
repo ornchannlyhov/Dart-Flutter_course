@@ -35,7 +35,6 @@ class Employee {
   Employee(this._name, this._skill, this._experience, this._baseSalary,
       this._address);
 
-  // Named constructor for mobile developers
   Employee.mobileDev(
       {required String name,
       required int experience,
