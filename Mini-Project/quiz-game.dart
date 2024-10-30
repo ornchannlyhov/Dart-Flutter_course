@@ -4,10 +4,10 @@ import 'dart:io';
 enum QuestionType { SINGLE_CHOICE, MULTIPLE_CHOICE }
 
 class Question {
-  String title;
-  List<String> options;
-  List<String> correctAnswers;
-  QuestionType questionType;
+  final String title;
+  final List<String> options;
+  final List<String> correctAnswers;
+  final QuestionType questionType;
 
   Question(this.title, this.options, this.correctAnswers, this.questionType);
 
@@ -49,12 +49,12 @@ class Question {
 }
 
 class Participant {
-  String id;
-  String firstName;
-  String lastName;
-  List<Result> results = [];
+  final String id;
+  final String firstName;
+  final String lastName;
+  final List<Result> results;
 
-  Participant(this.id, this.firstName, this.lastName);
+  Participant(this.id, this.firstName, this.lastName) : results = [];
 
   void addResult(Result r) {
     results.add(r);
@@ -74,18 +74,17 @@ class Participant {
   }
 
   static Participant fromJson(Map<String, dynamic> json) {
-    Participant participant =
-        Participant(json['id'], json['firstName'], json['lastName']);
-    participant.results = List<Result>.from(
-        json['results'].map((result) => Result.fromJson(result)));
+    final participant = Participant(json['id'], json['firstName'], json['lastName']);
+    participant.results.addAll(List<Result>.from(
+        json['results'].map((result) => Result.fromJson(result))));
     return participant;
   }
 }
 
 class Result {
-  int score;
-  String quizTitle;
-  DateTime date;
+  final int score;
+  final String quizTitle;
+  final DateTime date;
 
   Result(this.score, this.quizTitle, this.date);
 
@@ -107,10 +106,10 @@ class Result {
 }
 
 class Quiz {
-  String title;
-  List<Question> questions = [];
+  final String title;
+  final List<Question> questions;
 
-  Quiz(this.title);
+  Quiz(this.title) : questions = [];
 
   void addQuestion(Question q) {
     questions.add(q);
@@ -128,7 +127,7 @@ class Quiz {
     int score = 0;
 
     for (var question in questions) {
-      question.displayQuestion(); // Display the question and its options
+      question.displayQuestion();
 
       List<String> selectedAnswers = [];
 
@@ -149,7 +148,7 @@ class Quiz {
       }
     }
 
-    Result result = Result(score, title, DateTime.now());
+    final result = Result(score, title, DateTime.now());
     participant.addResult(result);
     return result;
   }
@@ -157,7 +156,7 @@ class Quiz {
   void displayQuestions() {
     print("\nAvailable Questions:");
     for (var i = 0; i < questions.length; i++) {
-      print('${i + 1}. ${questions[i].title}'); // Display all questions with numbers
+      print('${i + 1}. ${questions[i].title}');
     }
   }
 
@@ -169,17 +168,17 @@ class Quiz {
   }
 
   static Quiz fromJson(Map<String, dynamic> json) {
-    Quiz quiz = Quiz(json['title']);
-    quiz.questions = List<Question>.from(json['questions'].map((q) => Question.fromJson(q)));
+    final quiz = Quiz(json['title']);
+    quiz.questions.addAll(List<Question>.from(json['questions'].map((q) => Question.fromJson(q))));
     return quiz;
   }
 }
 
 class QuizSystem {
-  List<Participant> participants = [];
+  final List<Participant> participants;
   Quiz quiz;
 
-  QuizSystem(this.quiz);
+  QuizSystem(this.quiz) : participants = [];
 
   void run() {
     loadParticipants();
@@ -237,7 +236,7 @@ class QuizSystem {
     Participant? participant = participants.firstWhere(
       (p) => p.id == participantId,
       orElse: () {
-        Participant newParticipant = Participant(participantId, firstName, lastName);
+        final newParticipant = Participant(participantId, firstName, lastName);
         participants.add(newParticipant);
         return newParticipant;
       },
@@ -252,9 +251,9 @@ class QuizSystem {
       }
     }
 
-    Result result = quiz.takeQuiz(participant);
+    final result = quiz.takeQuiz(participant);
     print("You scored ${result.score} out of ${quiz.questions.length}.");
-    saveParticipants(); // Save participant results after taking the quiz
+    saveParticipants();
   }
 
   void addQuestion() {
@@ -268,7 +267,7 @@ class QuizSystem {
         ? QuestionType.SINGLE_CHOICE
         : QuestionType.MULTIPLE_CHOICE;
 
-    List<String> options = [];
+    final options = <String>[];
     while (true) {
       stdout.write("Enter an option (or type 'done' when finished): ");
       String option = stdin.readLineSync()!;
@@ -279,10 +278,8 @@ class QuizSystem {
     stdout.write("Enter the correct answers (comma-separated): ");
     List<String> correctAnswers = stdin.readLineSync()!.split(',').map((s) => s.trim()).toList();
 
-    Question question = Question(title, options, correctAnswers, questionType);
+    final question = Question(title, options, correctAnswers, questionType);
     quiz.addQuestion(question);
-
-    // Save the question immediately to persist data
     saveQuestions();
     print("Question added and saved successfully!");
   }
@@ -292,7 +289,7 @@ class QuizSystem {
     String participantId = stdin.readLineSync()!;
     if (participantId.toLowerCase() == 'cancel') return;
 
-    Participant participant = participants.firstWhere(
+    final participant = participants.firstWhere(
       (p) => p.id == participantId,
       orElse: () {
         print("Participant not found.");
@@ -302,54 +299,53 @@ class QuizSystem {
 
     print("\nResults for ${participant.firstName} ${participant.lastName}:");
     for (var result in participant.results) {
-      print("Quiz: ${result.quizTitle}, Score: ${result.score}, Date: ${result.date}");
+      print("${result.quizTitle} - Score: ${result.score}, Date: ${result.date}");
     }
   }
 
   void deleteQuestion() {
-    quiz.displayQuestions(); // Display questions with numbers
+    quiz.displayQuestions();
     stdout.write("Enter the question number to delete (or type 'cancel' to go back): ");
     String input = stdin.readLineSync()!;
     if (input.toLowerCase() == 'cancel') return;
 
-    int questionNumber = int.tryParse(input) ?? 0;
-    quiz.deleteQuestion(questionNumber - 1); // Adjust for zero-based index
-    saveQuestions(); // Save changes immediately
+    int index = int.tryParse(input) ?? -1;
+    quiz.deleteQuestion(index - 1); // Adjusting for zero-based index
+    saveQuestions();
     print("Question deleted successfully!");
   }
 
   void loadParticipants() {
-    File participantsFile = File('participants.json');
-    if (participantsFile.existsSync()) {
-      String contents = participantsFile.readAsStringSync();
-      List<dynamic> jsonList = jsonDecode(contents);
-      participants = jsonList.map((json) => Participant.fromJson(json)).toList();
+    final file = File('participants.json');
+    if (file.existsSync()) {
+      final jsonData = jsonDecode(file.readAsStringSync());
+      participants.addAll(List<Participant>.from(jsonData.map((p) => Participant.fromJson(p))));
+    }
+  }
+
+  void loadQuestions() {
+    final file = File('quiz.json');
+    if (file.existsSync()) {
+      final jsonData = jsonDecode(file.readAsStringSync());
+      quiz.questions.addAll(List<Question>.from(jsonData['questions'].map((q) => Question.fromJson(q))));
     }
   }
 
   void saveParticipants() {
-    File participantsFile = File('participants.json');
-    String jsonString = jsonEncode(participants.map((p) => p.toJson()).toList());
-    participantsFile.writeAsStringSync(jsonString);
-  }
-
-  void loadQuestions() {
-    File quizFile = File('quiz.json');
-    if (quizFile.existsSync()) {
-      String contents = quizFile.readAsStringSync();
-      quiz = Quiz.fromJson(jsonDecode(contents));
-    }
+    final file = File('participants.json');
+    final jsonData = participants.map((p) => p.toJson()).toList();
+    file.writeAsStringSync(jsonEncode(jsonData));
   }
 
   void saveQuestions() {
-    File quizFile = File('quiz.json');
-    String jsonString = jsonEncode(quiz.toJson());
-    quizFile.writeAsStringSync(jsonString);
+    final file = File('quiz.json');
+    final jsonData = quiz.toJson();
+    file.writeAsStringSync(jsonEncode(jsonData));
   }
 }
 
 void main() {
-  Quiz quiz = Quiz("General Knowledge Quiz");
-  QuizSystem quizSystem = QuizSystem(quiz);
+  final quiz = Quiz("Sample Quiz");
+  final quizSystem = QuizSystem(quiz);
   quizSystem.run();
 }
