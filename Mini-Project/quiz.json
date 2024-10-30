@@ -1,0 +1,18 @@
+{
+    "title": "General Knowledge Quiz",
+    "questions": [
+        {
+            "title": "what is the capital city of cambodia?",
+            "options": [
+                "pp",
+                "sr",
+                "btb",
+                "bmc"
+            ],
+            "correctAnswers": [
+                "pp"
+            ],
+            "questionType": "SINGLE_CHOICE"
+        }
+    ]
+}
