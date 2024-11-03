@@ -33,26 +33,24 @@ class MyButton extends StatelessWidget {
 }
 
 void main() {
-  runApp(MaterialApp(
-    home: Container(
-      child: const Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              MyButton(
-                  buttonName: 'OOP',
-                  startColor: 0xff64B5F6,
-                  endColor: 0xff1E88E5),
-              MyButton(
-                  buttonName: 'Dart',
-                  startColor: 0xff64B5F6,
-                  endColor: 0xff1E88E5),
-              MyButton(
-                  buttonName: 'Flutter',
-                  startColor: 0xff64B5F6,
-                  endColor: 0xff1E88E5),
-            ],
-          ),
+  runApp(const MaterialApp(
+    home:Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            MyButton(
+                buttonName: 'OOP',
+                startColor: 0xff64B5F6,
+                endColor: 0xff1E88E5),
+            MyButton(
+                buttonName: 'Dart',
+                startColor: 0xff64B5F6,
+                endColor: 0xff1E88E5),
+            MyButton(
+                buttonName: 'Flutter',
+                startColor: 0xff64B5F6,
+                endColor: 0xff1E88E5),
+          ],
         ),
       ),
     ),

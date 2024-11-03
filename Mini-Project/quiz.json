@@ -1,18 +1,1 @@
-{
-    "title": "General Knowledge Quiz",
-    "questions": [
-        {
-            "title": "what is the capital city of cambodia?",
-            "options": [
-                "pp",
-                "sr",
-                "btb",
-                "bmc"
-            ],
-            "correctAnswers": [
-                "pp"
-            ],
-            "questionType": "SINGLE_CHOICE"
-        }
-    ]
-}
+{"title":"Sample Quiz","questions":[{"title":"what is the capital city of cambodia?","options":["pp","btb","svay reang","sr"],"correctAnswers":["pp"],"questionType":"SINGLE_CHOICE"},{"title":"what is the traditional flower cambodai?","options":["rom dul",""],"correctAnswers":["rom dul"],"questionType":"SINGLE_CHOICE"}]}
