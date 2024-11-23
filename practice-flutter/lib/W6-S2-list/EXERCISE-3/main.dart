@@ -37,7 +37,7 @@ class _TemperatureAppState extends State<TemperatureApp> {
           ),
           child: isWelcomeScreen
               ? Welcome(onButtonPressed: switchToTemperatureScreen)
-              : Temperature()
+              : const Temperature()
         ),
       ),
     );

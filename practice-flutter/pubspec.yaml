@@ -77,6 +77,8 @@ flutter:
     - assets/w4-s2/girl.jpg
     - assets/w4-s2/insect.jpg
     - assets/w4-s2/man.jpg
+  #W7-S2-quizeApp  
+    - assets\quize\quiz-logo.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

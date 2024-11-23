@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testapp1/W6-S2-list/EXERCISE-4/joke.dart';
 
-Color appColor = Colors.green[300]!;
 
 void main() => runApp(const MaterialApp(
       home: JokeList(),
@@ -32,7 +31,7 @@ class _JokeListState extends State<JokeList> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: appColor,
+        backgroundColor: Colors.green,
         title: const Text("Favorite Jokes"),
       ),
       body: ListView.builder(
@@ -84,7 +83,7 @@ class FavoriteCard extends StatelessWidget {
                 Text(
                   title,
                   style:
-                      TextStyle(color: appColor, fontWeight: FontWeight.w800),
+                      const TextStyle(color: Colors.green, fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 10.0),
                 Text(description),
