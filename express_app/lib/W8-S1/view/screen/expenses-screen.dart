@@ -1,6 +1,6 @@
-import 'package:express_app/view/widget/expense_list.dart';
+import 'package:express_app/W8-S1/view/widget/expense_list.dart';
 import 'package:flutter/material.dart';
-import 'package:express_app/model/expense.dart';
+import 'package:express_app/W8-S1/model/expense.dart';
 
 class ExpensesScreen extends StatefulWidget {
   const ExpensesScreen({super.key});
