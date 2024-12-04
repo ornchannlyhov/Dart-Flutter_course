@@ -46,7 +46,7 @@ class _QuizAppState extends State<QuizApp> {
   void restartQuiz() {
     setState(() {
       currentQuestionIndex = 0;
-      setQuizState(QuizState.started);
+      setQuizState(QuizState.notStarted);
       submission.clearAnswer();
     });
   }

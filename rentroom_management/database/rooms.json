@@ -1,0 +1,13 @@
+{
+  "roomNumber": 101,
+  "roomPrice": 200.0,
+  "currentWaterUsed": 60.0,
+  "currentElecticUsed": 40.0,
+  "lastWaterUsed": 50.0,
+  "lastElecticUsed": 30.0,
+  "servicese": [
+    { "serviceId": 1, "serviceName": "WiFi", "servicePrice": 30.0 },
+    { "serviceId": 2, "serviceName": "Cleaning", "servicePrice": 50.0 }
+  ],
+  "buildingName": "Building A"
+}

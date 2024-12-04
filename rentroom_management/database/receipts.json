@@ -1,0 +1,19 @@
+[
+  {
+    "date": "2024-11-30T01:46:27.813625",
+    "room": {
+      "roomNumber": 101,
+      "roomPrice": 200.0,
+      "currentWaterUsed": 60.0,
+      "currentElecticUsed": 40.0,
+      "lastWaterUsed": 60.0,
+      "lastElecticUsed": 40.0,
+      "servicese": [
+        { "serviceId": 1, "serviceName": "WiFi", "servicePrice": 30.0 },
+        { "serviceId": 2, "serviceName": "Cleaning", "servicePrice": 50.0 }
+      ],
+      "buildingName": "Building A"
+    },
+    "paymentStatus": "paid"
+  }
+]

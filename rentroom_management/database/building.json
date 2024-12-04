@@ -1,0 +1,6 @@
+{
+  "name": "Building A",
+  "electricPrice": 1.5,
+  "waterPrice": 2.0,
+  "rooms": [{ "roomNumber": 101 }]
+}

@@ -16,8 +16,9 @@ void main() {
       possibleAnswers: ["g1", "g2", 'g3'],
       goodAnswer: 'g2');
 
-  List<Question> myQuestions = [q1, q2,q3];
+  List<Question> myQuestions = [q1, q2, q3];
   Quiz myQuiz = Quiz(title: "Crazy Quizz", questions: myQuestions);
-
-  runApp(QuizApp(quiz: myQuiz,));
+  runApp(QuizApp(
+    quiz: myQuiz,
+  ));
 }

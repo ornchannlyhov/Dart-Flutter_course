@@ -1,0 +1,4 @@
+[
+  { "serviceId": 1, "serviceName": "WiFi", "servicePrice": 30.0 },
+  { "serviceId": 2, "serviceName": "Cleaning", "servicePrice": 50.0 }
+]
